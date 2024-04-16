@@ -3,7 +3,7 @@ import csv
 
 def main():
     rows = []
-    with open("resources/Movie Data/ratings_export.csv", 'r') as file:
+    with open("moviedata/Movie Data/ratings_export.csv", 'r') as file:
         csvreader = csv.reader(file)
         header = next(csvreader)
         for row in csvreader:
