@@ -14,10 +14,10 @@ class Heap:
     def getParent(self, child):
         return child // 2
 
-    def leftChild(self, index):
+    def getLeftChild(self, index):
         return 2 * index
 
-    def rightChild(self, index):
+    def getRightChild(self, index):
         return 1 + (2 * index)
 
     def isLeaf(self, index):
