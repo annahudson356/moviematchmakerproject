@@ -6,4 +6,7 @@ class Graph:
     adj_list = map(movie, adj_movies)
     def insertEdge(self, a, b):
         pass
+    def bfs(self, source):
+        pass
+        # We could use this
 

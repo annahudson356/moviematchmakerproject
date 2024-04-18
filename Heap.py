@@ -1,6 +1,7 @@
 import sys
 
 class Heap:
+    # Citation: Geeks for Geeks (we will change this is just a skeleton to take up space for the time being)
     def __init__(self, max):
         # change some stuff as needed this is a basic heap structure
         # array based heap implementation
@@ -13,10 +14,10 @@ class Heap:
     def getParent(self, child):
         return child // 2
 
-    def leftChild(self, index):
+    def getLeftChild(self, index):
         return 2 * index
 
-    def rightChild(self, index):
+    def getRightChild(self, index):
         return 1 + (2 * index)
 
     def isLeaf(self, index):
