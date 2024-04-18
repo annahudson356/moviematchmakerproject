@@ -1,4 +1,4 @@
-import pandas
+# import pandas
 class Graph:
     movie = ""
     adj_movies = []
