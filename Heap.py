@@ -1,15 +1,12 @@
 import sys
-
+import Movie
 class Heap:
-    # Citation: Geeks for Geeks (we will change this is just a skeleton to take up space for the time being)
-    def __init__(self, max):
-        # change some stuff as needed this is a basic heap structure
-        # array based heap implementation
-        self.maxsize = max
+
+    def __init__(self, m):
+        self.max = m
         self.size = 0
-        self.Heap = [0] * (self.maxsize + 1)
-        self.Heap[0] = -1 * sys.maxsize
-        self.FRONT = 1
+        self.heap_arr = [m] * (self.size + 1)
+
 
     def getParent(self, child):
         return child // 2
@@ -18,14 +15,16 @@ class Heap:
         return 2 * index
 
     def getRightChild(self, index):
-        return 1 + (2 * index)
-
-    def isLeaf(self, index):
-        return index*2 > self.size
+        return 1 + (2*index)
 
     def swap(self, a, b):
         pass
 
     def heapify(self, index):
         # build a heap in place
+        pass
+
+    def extractMax(self):
+        pass
+    def kthLargestElements(self, k):
         pass

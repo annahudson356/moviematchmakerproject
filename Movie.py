@@ -1,6 +1,5 @@
-class Rating:
-    def __init__(self, a, b, c, d):
-        id = a
-        movie = b
-        rating = c
-        user = d
+class Movie:
+    def __init__(self,movieName, ):
+        pass
+    def getSimilarity(self):
+        pass

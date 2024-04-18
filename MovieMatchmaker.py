@@ -1,38 +1,30 @@
 import csv
-from Graph import Graph
-
-
-
+import Graph
+import Heap
 
 def main():
+    userFavoriteActor = input("Enter the actor you want to watch today, if not type 0")
+    userFavoriteGenre = input("Enter your favorite genre")
+    userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+) ")
+    howManySuggestions = input("Input how many suggestions you would like us to generate")
+
+
+
     rows = []
     with open("moviedata/movies.csv", 'r') as file:
         reader = csv.reader(file)
         header = next(reader)
         try:
             for row in reader:
-                rows.append(row)
+
+                rows.append(Movie(row[0], row[1], row[2], row[3]))
         except UnicodeDecodeError:
             pass
 
 
+
     print(header)
     print(rows)
-
-def welcome():
-    print("-----------------------------------")
-    print("    Welcome to Movie Matchmaker!   ")
-    print("-----------------------------------")
-    print("Have you ever wanted to watch a movie but had no idea what to watch, Movie Matchmaker is here to fix this"
-          "problem! If you are embroiled in a fight between friends on what movie to watch, we are here to rescue you!")
-
-
-def menu():
-    movie = input("Please enter your favorite movie")
-    actor = input("Please enter your favorite actor")
-    genre = input("Please enter your favorite genre")
-
-    matchmaker()
 
 
 def matchmaker():
