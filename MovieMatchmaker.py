@@ -22,8 +22,6 @@ def main():
         except UnicodeDecodeError:
             pass
 
-
-
     print(header)
     print(rows)
 
