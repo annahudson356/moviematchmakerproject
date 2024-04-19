@@ -47,4 +47,9 @@ class Heap:
 
     def kthLargestElements(self, k):
         pq = PriorityQueue()
+        for i in range(0, self.size):
+            pq.put(self.heap_arr[i])
+            if pq.size() < k:
+                pq.dequeue()
+        return pq.get()
 
