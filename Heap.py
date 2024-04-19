@@ -25,6 +25,8 @@ class Heap:
         pass
 
     def extractMax(self):
+        # Inspired by Programming Quiz 6
         pass
     def kthLargestElements(self, k):
+        # Inspired by Programming Quiz 6
         pass

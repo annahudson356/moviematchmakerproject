@@ -1,5 +1,5 @@
 class Movie:
-    def __init__(self,movieName, ):
+    def __init__(self, movieName, ):
         pass
     def getSimilarity(self):
         pass
