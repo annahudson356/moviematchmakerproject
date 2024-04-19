@@ -24,9 +24,26 @@ class Heap:
         # build a heap in place
         pass
 
+    def heapifyDown(self, index):
+        l = index * 2 + 1
+        r = index * 2 + 2
+        biggest = index
+        if l < self.size and self.heap_arr[l] > self.heap_arr[biggest]:
+            biggest = l
+        if r < self.size and self.heap_arr[r] > self.heap_arr[biggest]:
+            biggest = r
+        if biggest != index:
+            temp = self.heap_arr[index]
+            self.heap_arr[index] = self.heap_arr[biggest]
+            self.heap_arr[biggest] = temp
+            index = biggest
+            self.heapifyDown(index)
+
     def extractMax(self):
         # Inspired by Programming Quiz 6
-        pass
+        self.heap_arr[0] = self.heap_arr[--self.size]
+        self.heapifyDown(0)
+
     def kthLargestElements(self, k):
         # Inspired by Programming Quiz 6
         pass
