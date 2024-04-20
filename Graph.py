@@ -1,6 +1,7 @@
 # import pandas
 import Movie
 
+
 class Graph:
     graph_pairs = [] # [(x,y),(i,j)]
     graph_al = {}  # empty dictionary, map isn't the same as in c++
@@ -27,9 +28,6 @@ class Graph:
         elif 120 <= movie.length:
             return "long"
 
-
-
     def bfs(self, source):
         pass
         # We could use this
-

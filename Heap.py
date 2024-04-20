@@ -1,13 +1,13 @@
 import sys
 import Movie
 from queue import PriorityQueue
-class Heap:
 
+
+class Heap:
     def __init__(self, m):
         self.max = m
         self.size = 0
         self.heap_arr = [m] * (self.size + 1)
-
 
     def getParent(self, child):
         return child // 2
@@ -52,4 +52,3 @@ class Heap:
             if pq.size() < k:
                 pq.dequeue()
         return pq.get()
-
