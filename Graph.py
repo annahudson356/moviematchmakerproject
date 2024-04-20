@@ -1,43 +1,34 @@
 # import pandas
+import Movie
+
 class Graph:
-    class Vertex:
-        similarity = 0
-        class Movie:
-            movie = ""
-            genre = ""
-            actors = []
-            length = 0
+    graph_pairs = [] # [(x,y),(i,j)]
+    graph_al = {}  # empty dictionary, map isn't the same as in c++
 
-            def __init__(self, m, g, a, l):
-                self.movie = m
-                self.genre = g
-                self.actors = a
-                self.length = l
+    def insertEdge(self, movie_a, movie_b):
+        if movie_a.genre == movie_b.genre:
+            self.graph_pairs.append([movie_a, movie_b])
+            self.graph_al = dict(self.graph_pairs)
+        elif self.categorizeLength(movie_a) == self.categorizeLength(movie_b):  # don't really know if this is correct syntax at all
+            self.graph_pairs.append([movie_a, movie_b])
+            self.graph_al = dict(self.graph_pairs)
+        else:
+            for actor_a in movie_a.actors:
+                for actor_b in movie_b.actors:
+                    if actor_a == actor_b:
+                        self.graph_pairs.append([movie_a, movie_b])
+                        self.graph_al = dict(self.graph_pairs)  # transforms into a dict/map (adj list)
 
-    genre_pairs = []
-    actor_pairs = []
-    length_pairs = [] # [(x,y),(i,j)]
-    genre_al = {}  # empty dictionary, map isn't the same as in c++
-    actor_al = {}
-    length_al = {}
+    def categorizeLength(self, movie):
+        if 0 <= movie.length < 90:
+            return "short"
+        elif 90 <= movie.length < 120:
+            return "medium"
+        elif 120 <= movie.length:
+            return "long"
 
-    def insertGenreEdge(self, movie_a, movie_b):  # movie_a + movie_b are "match" movies
-        self.genre_pairs.append([movie_a, movie_b])
-        self.genre_al = dict(self.genre_pairs)  # transforms into a dict/map (adj list)
-        # three separate graphs for each attribute comparing "match worthiness"
-        pass
 
-    def insertActorEdge(self, movie_a, movie_b):
-        self.actor_pairs.append([movie_a, movie_b])
-        self.actor_al = dict(self.actor_pairs)
-        pass
 
-    def insertLengthEdge(self, movie_a, movie_b):
-        self.length_pairs.append([movie_a, movie_b])
-        self.length_al = dict(self.length_pairs)
-        pass
-
-    def make
     def bfs(self, source):
         pass
         # We could use this

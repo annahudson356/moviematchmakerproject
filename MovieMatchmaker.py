@@ -1,6 +1,8 @@
 import csv
 import Graph
 import Heap
+import Movie
+
 
 def main():
     '''
@@ -22,17 +24,19 @@ def main():
         except UnicodeDecodeError:
             pass
 
-
-
     print(header)
     print(rows)
 
+    graph = Graph.Graph()
+    for i in range(len(rows)-1):  # for all rows of movies
+        for j in range(len(rows[0])):  # for all attributes of movies
+            a = Movie.Movie(rows[i][j])  # two temporary movie objects
+            b = Movie.Movie(rows[i+1][j])
+        graph.insertEdge(a, b)  # insert edge between movie objects
 
 def matchmaker():
     # This is where our algorithm for the actual matchmaking process will go
     pass
-
-
 
 if __name__ == '__main__':
     main()
