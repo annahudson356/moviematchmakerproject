@@ -1,5 +1,6 @@
 import sys
 import Movie
+from queue import PriorityQueue
 class Heap:
 
     def __init__(self, m):
@@ -45,5 +46,10 @@ class Heap:
         self.heapifyDown(0)
 
     def kthLargestElements(self, k):
-        # Inspired by Programming Quiz 6
-        pass
+        pq = PriorityQueue()
+        for i in range(0, self.size):
+            pq.put(self.heap_arr[i])
+            if pq.size() < k:
+                pq.dequeue()
+        return pq.get()
+
