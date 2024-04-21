@@ -7,30 +7,34 @@ from Movie import Movie
 
 def main():
     print("Welcome to Movie Matchmaker! Please follow the prompts below to be matched to your ideal movie!\n\n")
-    userSimilarMovie = input("Enter the movie you want to find something similar to ")
-    userFavoriteActors = input("Enter one actor you want to watch today ")
-    userFavoriteGenre = input("Enter your favorite genre ")
-    userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+) ")
-    howManySuggestions = input("Input how many suggestions you would like us to generate ")
+    while True:
+        toExit = input("Press ENTER to continue, any other key to exit")
+        if toExit != "":
+            break
+        userSimilarMovie = input("Enter the movie you want to find something similar to ")
+        userFavoriteActors = input("Enter one actor you want to watch today ")
+        userFavoriteGenre = input("Enter your favorite genre ")
+        userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+) ")
+        howManySuggestions = input("Input how many suggestions you would like us to generate ")
 
-    rows = []
-    with open("moviedata/movies.csv", 'r') as file:
-        reader = csv.reader(file)
-        header = next(reader)
-        try:
-            for row in reader:
-                rows.append(row)
-        except UnicodeDecodeError:
-            pass
-    graph = populateGraph(rows)
-    movieHeap = populateHeap(rows)
-    matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength)
-    matchHeap(userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength)
+        rows = []
+        with open("moviedata/movies.csv", 'r') as file:
+            reader = csv.reader(file)
+            header = next(reader)
+            try:
+                for row in reader:
+                    rows.append(row)
+            except UnicodeDecodeError:
+                pass
+        graph = populateGraph(rows)
+        movieHeap = populateHeap(rows)
+        matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength)
+        matchHeap(userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength)
 
 
-    print("Was the heap faster than the graph?")
-    print(matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength) >
-    matchHeap(userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength))
+        print("Was the heap faster than the graph?")
+        print(matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength) >
+        matchHeap(userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength))
 
 
 def populateGraph(rows):
