@@ -1,19 +1,6 @@
 # import pandas
+from collections import deque
 class Graph:
-    class Vertex:
-        similarity = 0
-        class Movie:
-            movie = ""
-            genre = ""
-            actors = []
-            length = 0
-
-            def __init__(self, m, g, a, l):
-                self.movie = m
-                self.genre = g
-                self.actors = a
-                self.length = l
-
     genre_pairs = []
     actor_pairs = []
     length_pairs = [] # [(x,y),(i,j)]
@@ -37,8 +24,24 @@ class Graph:
         self.length_al = dict(self.length_pairs)
         pass
 
-    def make
-    def bfs(self, source):
+    def make(self):
         pass
-        # We could use this
+    def bfs(self, source):
+        visited = [False] # * graph.size()
+        visited[source] = True
+        q = deque
 
+        q.append(source)
+
+        while q:
+            current = q.popleft()
+            # action with current node
+
+            for neighbor in #something? not really sure I understand the graph implementation:
+                if not visited[neighbor]:
+                    visited[neighbor] = True
+                    q.append(neighbor)
+
+class Vertex:
+    # currentMovie = Movie()
+    similarity = 0
