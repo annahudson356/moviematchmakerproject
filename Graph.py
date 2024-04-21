@@ -1,47 +1,33 @@
 # import pandas
-from collections import deque
+import Movie
+
+
 class Graph:
-    genre_pairs = []
-    actor_pairs = []
-    length_pairs = [] # [(x,y),(i,j)]
-    genre_al = {}  # empty dictionary, map isn't the same as in c++
-    actor_al = {}
-    length_al = {}
+    graph_pairs = [] # [(x,y),(i,j)]
+    graph_al = {}  # empty dictionary, map isn't the same as in c++
 
-    def insertGenreEdge(self, movie_a, movie_b):  # movie_a + movie_b are "match" movies
-        self.genre_pairs.append([movie_a, movie_b])
-        self.genre_al = dict(self.genre_pairs)  # transforms into a dict/map (adj list)
-        # three separate graphs for each attribute comparing "match worthiness"
-        pass
+    def insertEdge(self, movie_a, movie_b):
+        if movie_a.genre == movie_b.genre:
+            self.graph_pairs.append([movie_a, movie_b])
+            self.graph_al = dict(self.graph_pairs)
+        elif self.categorizeLength(movie_a) == self.categorizeLength(movie_b):  # don't really know if this is correct syntax at all
+            self.graph_pairs.append([movie_a, movie_b])
+            self.graph_al = dict(self.graph_pairs)
+        else:
+            for actor_a in movie_a.actors:
+                for actor_b in movie_b.actors:
+                    if actor_a == actor_b:
+                        self.graph_pairs.append([movie_a, movie_b])
+                        self.graph_al = dict(self.graph_pairs)  # transforms into a dict/map (adj list)
 
-    def insertActorEdge(self, movie_a, movie_b):
-        self.actor_pairs.append([movie_a, movie_b])
-        self.actor_al = dict(self.actor_pairs)
-        pass
+    def categorizeLength(self, movie):
+        if 0 <= movie.length < 90:
+            return "short"
+        elif 90 <= movie.length < 120:
+            return "medium"
+        elif 120 <= movie.length:
+            return "long"
 
-    def insertLengthEdge(self, movie_a, movie_b):
-        self.length_pairs.append([movie_a, movie_b])
-        self.length_al = dict(self.length_pairs)
-        pass
-
-    def make(self):
-        pass
     def bfs(self, source):
-        visited = [False] # * graph.size()
-        visited[source] = True
-        q = deque
-
-        q.append(source)
-
-        while q:
-            current = q.popleft()
-            # action with current node
-
-            for neighbor in #something? not really sure I understand the graph implementation:
-                if not visited[neighbor]:
-                    visited[neighbor] = True
-                    q.append(neighbor)
-
-class Vertex:
-    # currentMovie = Movie()
-    similarity = 0
+        pass
+        # We could use this
