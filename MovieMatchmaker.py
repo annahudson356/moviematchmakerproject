@@ -23,18 +23,19 @@ def main():
             pass
 
     print(header)
-    print(rows)
+    print(rows, end='\n')
 
+def populateGraph(rows, userFavoriteGenre, userFavoriteActor, userPreferredLength):
     graph = Graph.Graph()
-    for i in range(len(rows)-1):  # for all rows of movies
-        for j in range(len(rows[0])):  # for all attributes of movies
-            a = Movie.Movie(rows[i][j])  # two temporary movie objects
-            b = Movie.Movie(rows[i+1][j])
-        graph.insertEdge(a, b)  # insert edge between movie objects
+    idealMovie = Movie.Movie("", userFavoriteGenre, userFavoriteActor, userPreferredLength, 10)
+    for row in rows:
+        movie = Movie.Movie(row[0], row[2], row[9], row[14],row[5]) # someone can double check i added the correct attributes according to dataset lol
+        graph.addVertex(movie) # adds the movie AND adds edges to any similar existing movies (see graph class)
 
 
-def matchmaker():
-    # This is where our algorithm for the actual matchmaking process will go possibly
+
+def matchmaker(rows):
+    # This is where our algorithm for the actual matchmaking process will go
     pass
 
 
