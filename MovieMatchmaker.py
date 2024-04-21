@@ -10,7 +10,11 @@ def main():
     while True:
         toExit = input("Press ENTER to continue, any other key to exit: ")
         if toExit != "":
+            print("\n\n\nThanks for using Movie MatchMaker!")
+            print("--------------------\nCredits: \n")
+            print("Chloe Bai\nNora Choukri\nAnna Hudson")
             break
+
         userSimilarMovie = input("Enter the movie you want to find something similar to ")
         userFavoriteActors = input("Enter one actor you want to watch today ")
         userFavoriteGenre = input("Enter your favorite genre ")
@@ -28,13 +32,17 @@ def main():
                 pass
 
         try:
+            # Creates the graph and the heap data structure
             graph = populateGraph(rows)
             movieHeap = populateHeap(rows)
-            matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength)
+
+
+            # Does the Matchmaking process
+            matchGraph(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength)
             matchHeap(movieHeap, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
 
 
-            print("Was the heap faster than the graph?")
+            print("Data Collection: Was the Heap faster than the Graph?")
             print(matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength) >
             matchHeap(movieHeap, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength))
         except ValueError:
@@ -71,7 +79,7 @@ def populateHeap(rows):
 
 
 
-def matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength):
+def matchGraph(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength):
     time_a = datetime.now()
     idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10)
     graph.addVertex(idealMovie)
@@ -87,6 +95,8 @@ def matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, u
     time_b = datetime.now()
     print("Time taken to find your ideal movie using the heap: " + str(time_b - time_a))
     return time_b - time_a
+
+
 def matchHeap(heap, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
     time_a = datetime.now()
     heap.kthLargestElements(howManySuggestions)
