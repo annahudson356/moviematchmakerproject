@@ -1,10 +1,4 @@
 class Movie:
-    movie = ""
-    genre = ""
-    actor = "" # the dataset only gives the star actor, not multiple, so i changed from array to string
-    length = 0
-    score = 0 # added score b/c we should recommend similar movies with the highest scores
-
     def __init__(self, m, g, a, l, s):
         self.movie = m
         self.genre = g
@@ -17,13 +11,19 @@ class Movie:
             return True
         return False
 
+    def getMovie(self):
+        return self.movie
+
+    def getScore(self):
+        return self.score
+
     def compareActor(self, movie2):
         if self.actor == movie2.actor:
             return True
         return False
 
     def compareLength(self, movie2):
-        if abs(self.length - movie2.length) < 30:
+        if abs(float(self.length) - float(movie2.length)) < 30:
             return True
         return False
 
@@ -36,6 +36,7 @@ class Movie:
             similarity += 1
         if(movie2.actors==self.actors):
             similarity += 1
-        if(movie2.length==self.length):
-            similarity += 1
+        if(movie2.length != "" and self.length != ""):
+            if(abs(float(movie2.length) - float(self.length)) < 30):
+                similarity += 1
         return similarity

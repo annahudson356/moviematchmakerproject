@@ -21,6 +21,13 @@ class Graph:
             self.adj_list[key] = []
         self.adj_list[key].append(value)
 
+    def getEdges(self, key):
+        edges = {}
+        for vertex in self.adj_list[key]:
+            if vertex not in edges:
+                edges[vertex] = 0
+            edges[vertex] += 1
+        return edges
 
     def bfs(self, source):
         visited = [False]  # * graph.size()
