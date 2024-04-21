@@ -99,7 +99,8 @@ def matchGraph(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, u
 
 def matchHeap(heap, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
     time_a = datetime.now()
-    heap.kthLargestElements(howManySuggestions)
+    for i in range(0, int(howManySuggestions)):
+        print(heap.kthLargestElements(i))
     time_b = datetime.now()
     print("Time taken to find your ideal movie using the heap: " + str(time_b - time_a))
     return time_b - time_a

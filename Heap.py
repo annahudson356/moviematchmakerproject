@@ -9,14 +9,7 @@ class Heap:
         self.size = 0
         self.heap_arr = []
 
-    def getParent(self, child):
-        return child // 2
 
-    def getLeftChild(self, index):
-        return 2 * index
-
-    def getRightChild(self, index):
-        return 1 + (2*index)
 
     def getArr(self):
         return self.heap_arr
