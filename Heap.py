@@ -7,7 +7,7 @@ class Heap:
     def __init__(self):
         self.max = -1
         self.size = 0
-        self.heap_arr = [m] * (self.size + 1)
+        self.heap_arr = []
 
     def getParent(self, child):
         return child // 2
@@ -19,7 +19,7 @@ class Heap:
         return 1 + (2*index)
 
     def getArr(self):
-        return heap_arr
+        return self.heap_arr
 
     def heapifyDown(self, index):
         l = index * 2 + 1
