@@ -4,8 +4,8 @@ from queue import PriorityQueue
 
 
 class Heap:
-    def __init__(self, m):
-        self.max = m
+    def __init__(self):
+        self.max = -1
         self.size = 0
         self.heap_arr = [m] * (self.size + 1)
 
@@ -18,14 +18,16 @@ class Heap:
     def getRightChild(self, index):
         return 1 + (2*index)
 
+    def getArr(self):
+        return heap_arr
 
     def heapifyDown(self, index):
         l = index * 2 + 1
         r = index * 2 + 2
         biggest = index
-        if l < self.size and self.heap_arr[l] > self.heap_arr[biggest]:
+        if l < self.size and self.heap_arr[l].similarity > self.heap_arr[biggest].similarity:
             biggest = l
-        if r < self.size and self.heap_arr[r] > self.heap_arr[biggest]:
+        if r < self.size and self.heap_arr[r].similarity > self.heap_arr[biggest].similarity:
             biggest = r
         if biggest != index:
             temp = self.heap_arr[index]
@@ -36,8 +38,10 @@ class Heap:
 
     def extractMax(self):
         # Inspired by Programming Quiz 6
+        temp = self.heap_arr[0]
         self.heap_arr[0] = self.heap_arr[--self.size]
         self.heapifyDown(0)
+        return temp
 
     def kthLargestElements(self, k):
         pq = PriorityQueue()

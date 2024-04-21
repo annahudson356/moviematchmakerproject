@@ -1,6 +1,6 @@
 import csv
 from Graph import Graph
-import Heap
+from Heap import Heap
 from Movie import Movie
 
 
@@ -21,6 +21,7 @@ def main():
         except UnicodeDecodeError:
             pass
     graph = populateGraph(rows)
+    movieHeap = populateHeap(rows)
     matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength)
 
 
@@ -36,6 +37,14 @@ def populateGraph(rows):
 
 def populateHeap(rows):
     heap = Heap()
+    for i in range(len(rows)):
+        if rows[i][14] == "":
+            movie = Movie(rows[i][0], rows[i][2], rows[i][9], -1, rows[i][5])
+        else:
+            movie = Movie(rows[i][0], rows[i][2], rows[i][9], float(rows[i][14]), rows[i][5])
+        heap.getArr().append(movie)
+    heap.heapifyDown(0)
+    return heap
 
 
 
