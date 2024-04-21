@@ -34,13 +34,4 @@ class Heap:
         temp = self.heap_arr[0]
         self.heap_arr[0] = self.heap_arr[--self.size]
         self.heapifyDown(0)
-        return temp
-
-    def kthLargestElements(self, k):
-        pq = PriorityQueue()
-        for i in range(0, self.size):
-            pq.put(self.heap_arr[i])
-            if pq.size() < k:
-                pq.dequeue()
-        print(pq.get())
-        return pq.get()
+        return temp.getMovie()
