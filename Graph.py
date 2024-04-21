@@ -1,5 +1,6 @@
 # import pandas
 import Movie
+from collections import deque
 
 
 class Graph:
@@ -29,5 +30,19 @@ class Graph:
             return "long"
 
     def bfs(self, source):
-        pass
-        # We could use this
+        visited = [False]  # * graph.size()
+        visited[source] = True
+        q = deque
+
+        q.append(source)
+
+        while q:
+            current = q.popleft()
+            # action with current node
+
+            for neighbor in  # something? not really sure I understand the graph implementation:
+                if not visited[neighbor]:
+                    visited[neighbor] = True
+                    q.append(neighbor)
+
+
