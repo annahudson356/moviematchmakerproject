@@ -107,4 +107,3 @@ def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, 
 
 if __name__ == '__main__':
     main()
-
