@@ -9,17 +9,24 @@ class Movie:
         self.movie = m
         self.genre = g
         self.actors = a
-        self.length = l
+        if l == "short" or l == "medium" or l == "long":
+            self.length = l
+        elif 0 <= l < 90:
+            self.length = "short"
+        elif 90 <= l < 120:
+            self.length = "medium"
+        elif 120 <= l:
+            self.length = "long"
         self.score = s
 
-    def getSimilarity(self, movie2): # just a rough idea
+    def getSimilarity(self, movie2):
         similarity = 0
-        if(movie2.movie==self.movie):
+        if movie2.genre == self.genre:
             similarity += 1
-        if(movie2.genre==self.genre):
+        if movie2.length == self.length:
             similarity += 1
-        if(movie2.actors==self.actors):
-            similarity += 1
-        if(movie2.length==self.length):
-            similarity += 1
+        for actor in self.actors:
+            for actor2 in movie2.actors:
+                if actor == actor2:
+                    similarity += 1
         return similarity

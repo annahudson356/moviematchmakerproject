@@ -1,16 +1,15 @@
 import csv
-import Graph
+from Graph import Graph
 import Heap
-import Movie
+from Movie import Movie
 
 
 def main():
-    '''
-    userFavoriteActor = input("Enter the actor you want to watch today, if not type 0")
-    userFavoriteGenre = input("Enter your favorite genre")
+    userSimilarMovie = input("Enter the movie you want to find something similar to ")
+    userFavoriteActors = [input("Enter up to 3 actors you want to watch today "), input(""), input("")]
+    userFavoriteGenre = input("Enter your favorite genre ")
     userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+) ")
-    howManySuggestions = input("Input how many suggestions you would like us to generate")
-    '''
+    howManySuggestions = input("Input how many suggestions you would like us to generate ")
 
     rows = []
     with open("moviedata/movies.csv", 'r') as file:
@@ -21,23 +20,32 @@ def main():
                 rows.append(row)
         except UnicodeDecodeError:
             pass
-
-    print(header)
-    print(rows)
-
-    graph = Graph.Graph()
-    for i in range(len(rows)-1):  # for all rows of movies
-        for j in range(len(rows[0])):  # for all attributes of movies
-            a = Movie.Movie(rows[i][j])  # two temporary movie objects
-            b = Movie.Movie(rows[i+1][j])
-        graph.insertEdge(a, b)  # insert edge between movie objects
+    graph = populateGraph(rows)
+    matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength)
 
 
-def matchmaker():
-    # This is where our algorithm for the actual matchmaking process will go possibly
-    pass
+def populateGraph(rows):
+    graph = Graph()
+    for i in range(len(rows)):  # for all rows of movies
+        movie = Movie(rows[i][0], rows[i][2], [rows[i][9], rows[i][10], rows[i][11]], float(rows[i][14]), rows[i][5])
+        graph.addVertex(movie)
+    return graph
+
+
+def matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength):
+    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10)
+    graph.addVertex(idealMovie)
+    movies = graph.getEdges(idealMovie)
+    print(movies)
+    top = idealMovie.movie
+    highestSim = 0
+    for movie in movies:
+        if movie.getSimilarity(idealMovie) > highestSim:
+            if movie.movie != idealMovie.movie:
+                highestSim = movie.getSimilarity(idealMovie)
+                top = movie.movie
+    print(top)
 
 
 if __name__ == '__main__':
     main()
-

@@ -4,30 +4,25 @@ from collections import deque
 
 
 class Graph:
-    graph_pairs = [] # [(x,y),(i,j)]
-    graph_al = {}  # empty dictionary, map isn't the same as in c++
+    adj_list = {}
 
-    def insertEdge(self, movie_a, movie_b):
-        if movie_a.genre == movie_b.genre:
-            self.graph_pairs.append([movie_a, movie_b])
-            self.graph_al = dict(self.graph_pairs)
-        elif self.categorizeLength(movie_a) == self.categorizeLength(movie_b):  # don't really know if this is correct syntax at all
-            self.graph_pairs.append([movie_a, movie_b])
-            self.graph_al = dict(self.graph_pairs)
-        else:
-            for actor_a in movie_a.actors:
-                for actor_b in movie_b.actors:
-                    if actor_a == actor_b:
-                        self.graph_pairs.append([movie_a, movie_b])
-                        self.graph_al = dict(self.graph_pairs)  # transforms into a dict/map (adj list)
+    def addVertex(self, key):
+        self.adj_list[key] = []
+        for vertex in self.adj_list: # goes thru each existing vertex in the graph
+            for i in range(vertex.getSimilarity(key)): # adds possibly multiple edges based on the similarity (see movie class)
+                self.adj_list[key].append(vertex)
+                self.adj_list[vertex].append(key) # I think an undirected graph makes the most sense so add both ways?
 
-    def categorizeLength(self, movie):
-        if 0 <= movie.length < 90:
-            return "short"
-        elif 90 <= movie.length < 120:
-            return "medium"
-        elif 120 <= movie.length:
-            return "long"
+    def addEdge(self, key, value):
+        if key not in self.adj_list:
+            self.adj_list[key] = []
+        self.adj_list[key].append(value)
+
+    def getEdges(self, key):
+        edges = []
+        for vertex in self.adj_list[key]:
+            edges.append(vertex)
+        return edges
 
     def bfs(self, source):
         visited = [False]  # * graph.size()
@@ -38,11 +33,8 @@ class Graph:
 
         while q:
             current = q.popleft()
-            # action with current node
-
+        '''    # action with current node
             for neighbor in  # something? not really sure I understand the graph implementation:
                 if not visited[neighbor]:
                     visited[neighbor] = True
-                    q.append(neighbor)
-
-
+                    q.append(neighbor) '''
