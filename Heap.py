@@ -18,12 +18,6 @@ class Heap:
     def getRightChild(self, index):
         return 1 + (2*index)
 
-    def swap(self, a, b):
-        pass
-
-    def heapify(self, index):
-        # build a heap in place
-        pass
 
     def heapifyDown(self, index):
         l = index * 2 + 1

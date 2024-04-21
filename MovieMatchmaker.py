@@ -34,6 +34,10 @@ def populateGraph(rows):
         graph.addVertex(movie)
     return graph
 
+def populateHeap(rows):
+    heap = Heap()
+
+
 
 def matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength):
     idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10)
@@ -47,6 +51,8 @@ def matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, u
                 highestSim = movie.getSimilarity(idealMovie)
                 top = movie.movie
     print(top)
+def matchHeap(userSimilarMovie, userFavoriteGenre, userFavoriteActors, userPreferredLength):
+    pass
 
 
 if __name__ == '__main__':
