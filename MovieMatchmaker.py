@@ -37,13 +37,11 @@ def main():
             movieHeap = populateHeap(rows)
 
             # Does the Matchmaking process
-            matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
-            matchHeap(movieHeap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
+            a = matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
+            b = matchHeap(movieHeap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
 
             print("Data Collection: Was the Heap faster than the Graph?")
-            print(matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength,
-                             howManySuggestions) >
-                  matchHeap(movieHeap, userFavoriteGenre, userFavoriteActors, userPreferredLength))
+            print(a > b)
         except ValueError:
             print("Invalid Input! Please Try Again!\n\n\n")
             continue
@@ -99,8 +97,10 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength
 
 def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
     time_a = datetime.now()
+    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10000)
+    heap.getArr().append(idealMovie)
     for i in range(0, int(howManySuggestions)):
-        print(heap.kthLargestElements(i))
+        print(heap.kthLargestElements(i+1))
     time_b = datetime.now()
     print("Time taken to find your ideal movie using the heap: " + str(time_b - time_a))
     return time_b - time_a

@@ -42,4 +42,5 @@ class Heap:
             pq.put(self.heap_arr[i])
             if pq.size() < k:
                 pq.dequeue()
+        print(pq.get())
         return pq.get()
