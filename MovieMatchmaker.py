@@ -6,7 +6,7 @@ from Movie import Movie
 
 def main():
     userSimilarMovie = input("Enter the movie you want to find something similar to ")
-    userFavoriteActors = [input("Enter up to 3 actors you want to watch today "), input(""), input("")]
+    userFavoriteActors = input("Enter one actor you want to watch today ")
     userFavoriteGenre = input("Enter your favorite genre ")
     userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+) ")
     howManySuggestions = input("Input how many suggestions you would like us to generate ")
@@ -27,7 +27,10 @@ def main():
 def populateGraph(rows):
     graph = Graph()
     for i in range(len(rows)):  # for all rows of movies
-        movie = Movie(rows[i][0], rows[i][2], [rows[i][9], rows[i][10], rows[i][11]], float(rows[i][14]), rows[i][5])
+        if rows[i][14] == "":
+            movie = Movie(rows[i][0], rows[i][2], rows[i][9], -1, rows[i][5])
+        else:
+            movie = Movie(rows[i][0], rows[i][2], rows[i][9], float(rows[i][14]), rows[i][5])
         graph.addVertex(movie)
     return graph
 
@@ -36,7 +39,6 @@ def matchmaker(graph, userSimilarMovie, userFavoriteGenre, userFavoriteActors, u
     idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10)
     graph.addVertex(idealMovie)
     movies = graph.getEdges(idealMovie)
-    print(movies)
     top = idealMovie.movie
     highestSim = 0
     for movie in movies:

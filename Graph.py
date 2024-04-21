@@ -1,4 +1,3 @@
-# import pandas
 import Movie
 from collections import deque
 
