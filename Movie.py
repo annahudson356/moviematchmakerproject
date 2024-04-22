@@ -21,6 +21,9 @@ class Movie:
     def getMovie(self):
         return self.movie
 
+    def getScore(self):
+        return self.score
+
     def getSimilarity(self, movie2):
         # This could get ugly but we should have certain genres rank higher than others
         similarity = 0
@@ -29,5 +32,5 @@ class Movie:
         if movie2.length == self.length:
             similarity += 10
         if movie2.actors == self.actors:
-            similarity += 500
+            similarity += 50
         return similarity
