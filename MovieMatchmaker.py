@@ -83,7 +83,7 @@ def main():
 def populateGraph(rows):
     graph = Graph()
     for i in range(len(rows)):  # for all rows of movies
-        movie = Movie(rows[i][0], rows[i][2], rows[i][9], float(rows[i][14]), rows[i][5])
+        movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][14], rows[i][5])
         graph.addVertex(movie)
     return graph
 
@@ -96,7 +96,7 @@ def populateHeap(rows, idealMovie):
         if rows[i][14] == "":
             movie = Movie(rows[i][0], rows[i][2], rows[i][9], -1, rows[i][5])
         else:
-            movie = Movie(rows[i][0], rows[i][2], rows[i][9], float(rows[i][14]), rows[i][5])
+            movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][14], rows[i][5])
         heap.getArr().append(movie)
         heap.size = heap.size + 1
 

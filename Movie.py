@@ -3,7 +3,7 @@ class Movie:
         self.movie = m
         self.genre = g
         self.actors = a
-        if l == "short" or l == "medium" or l == "long":
+        if l == "short" or l == "medium" or l == "long" or l == "":
             self.length = l
         else:
             l = float(l)

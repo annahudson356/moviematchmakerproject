@@ -32,7 +32,7 @@ class Graph:
 
         while q:
             current = q.popleft()
-            for neighbor in adj_list:
+            for neighbor in self.adj_list:
                 if not visited[neighbor]:
                     visited[neighbor] = True
                     q.enqueue(neighbor)
