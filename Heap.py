@@ -3,6 +3,7 @@ import Movie
 from queue import PriorityQueue
 
 
+
 class Heap:
     def __init__(self):
         self.max = -1

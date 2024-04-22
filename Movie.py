@@ -34,3 +34,4 @@ class Movie:
         if movie2.actors == self.actors and movie2.actors != "" and self.actors != "":
             similarity += 5
         return similarity
+
