@@ -49,7 +49,7 @@ def main():
 
             # Times the Heap Creation
             a = datetime.now()
-            movieHeap = populateHeap(rows)
+            movieHeap = populateHeap(rows, Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10))
             b = datetime.now()
             time = b - a
             heapRunningSum += time.total_seconds()
@@ -93,7 +93,7 @@ def populateGraph(rows):
 
 
 
-def populateHeap(rows):
+def populateHeap(rows, idealMovie):
     heap = Heap()
     for i in range(len(rows)):
         if rows[i][14] == "":
@@ -103,7 +103,7 @@ def populateHeap(rows):
         heap.getArr().append(movie)
         heap.size = heap.size + 1
 
-    heap.heapifyDown(0)
+    heap.heapifyDown(0, idealMovie)
     return heap
 
 
@@ -127,7 +127,7 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength
 
 def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
     idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 1000)
-    tempMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 0)
+    # tempMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 0)
     highestSim = idealMovie
     heap.getArr().append(idealMovie)
     for movie in heap.getArr():
@@ -135,9 +135,9 @@ def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, 
             if movie.movie not in heap.getArr() and movie.getMovie() != idealMovie.movie:
                 highestSim = movie.movie
 
-    heap.heapifyDown(heap.getArr().index(highestSim))
+    heap.heapifyDown(heap.getArr().index(highestSim), idealMovie)
     for i in range(0, int(howManySuggestions)):
-        print(heap.extractMax())
+        print(heap.extractMax(idealMovie))
 
 
 if __name__ == '__main__':
