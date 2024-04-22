@@ -13,12 +13,6 @@ def main():
           "sure to watch capitalization!\n\nNOTE: We use the data to enter to find the most similar movie across all aspects"
           ", not necessarily the movie that matches everything exactly!")
     while True:
-        toExit = input("Press ENTER to continue, any other key to exit: ")
-        if toExit != "":
-            print("\n\n\nThanks for using Movie MatchMaker!")
-            print("--------------------\nCredits: \n")
-            print("Chloe Bai\nNora Choukri\nAnna Hudson")
-            break
 
         # userSimilarMovie = input("Enter the movie you want to find something similar to ")
         userFavoriteActors = input("Enter one actor you want to watch today: ")
@@ -80,6 +74,13 @@ def main():
         print("Heap Total Time: " + str(heapRunningSum))
         print("Which was faster? " + "Heap" if heapRunningSum < graphRunningSum else "Graph")
 
+        toExit = input("Press ENTER to continue, any other key to exit: ")
+        if toExit != "":
+            print("\n\n\nThanks for using Movie MatchMaker!")
+            print("--------------------\nCredits: \n")
+            print("Chloe Bai\nNora Choukri\nAnna Hudson")
+            break
+
 
 
 def populateGraph(rows):
@@ -99,13 +100,11 @@ def populateHeap(rows, idealMovie):
             movie = Movie(rows[i][0], rows[i][2], rows[i][9], -1, rows[i][5])
             if movie.getSimilarity(idealMovie) > 30:
                 heap.getArr().append(movie)
-                heap.size = heap.size + 1
         else:
             movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][14], rows[i][5])
             if movie.getSimilarity(idealMovie) > 30:
                 heap.getArr().append(movie)
-                heap.size = heap.size + 1
-
+    heap.size = len(heap.getArr())
 
 
     temp = Movie(rows[0][0], rows[0][2], rows[0][9], -1, rows[0][5])
@@ -137,19 +136,30 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength
         print(movie)
 
 
-def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
-    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 1000)
-    # tempMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 0)
-    highestSim = idealMovie
-    heap.getArr().append(idealMovie)
-    for movie in heap.getArr():
-        if movie.getSimilarity(idealMovie) > highestSim.getSimilarity(idealMovie):
-            if movie.movie not in heap.getArr() and movie.getMovie() != idealMovie.movie:
-                highestSim = movie.movie
 
-    heap.heapifyDown(heap.getArr().index(highestSim), idealMovie)
-    for i in range(0, int(howManySuggestions)):
-        print(heap.extractMax(idealMovie))
+def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
+    try:
+        alreadyPrintedMovies = []
+        idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 1000)
+        # tempMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 0)
+        highestSim = idealMovie
+        heap.getArr().append(idealMovie)
+        for movie in heap.getArr():
+            if movie.getSimilarity(idealMovie) > highestSim.getSimilarity(idealMovie):
+                if movie.movie not in heap.getArr() and movie.getMovie() != idealMovie.movie:
+                    highestSim = movie.movie
+
+        heap.heapifyDown(heap.getArr().index(highestSim), idealMovie)
+        for i in range(0, int(howManySuggestions)):
+            if movie in alreadyPrintedMovies:
+                print("No more similar recommendations!")
+                break
+            else:
+                print(heap.extractMax(idealMovie))
+                alreadyPrintedMovies.append(heap.extractMax(idealMovie))
+    except IndexError:
+        print("No more similar recommendations! Check out some of these movies! Happy watching!")
+
 
 
 if __name__ == '__main__':
