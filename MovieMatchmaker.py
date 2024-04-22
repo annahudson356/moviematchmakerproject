@@ -108,8 +108,10 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength
                     highestSim = movie.getSimilarity(idealMovie)
                     top = movie
         movie_list.append(top)
-    for movie in movie_list:
+    sorted_movies = sorted(movie_list, key=lambda movie: (movie.getSimilarity(idealMovie), movie.getScore()), reverse=True)
+    for movie in sorted_movies:
         print(movie.getMovie() + ", Rating out of 10: " + movie.getScore() + ", Similarity Score: " + str(movie.getSimilarity(idealMovie)))
+
 
 
 
@@ -128,7 +130,8 @@ def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, 
     movie_list = []
     while (len(movie_list) < howManySuggestions):
         movie_list.append(heap.extractMax(idealMovie))
-    for movie in movie_list:
+    sorted_movies = sorted(movie_list, key=lambda movie: (movie.getSimilarity(idealMovie), movie.getScore()),reverse=True)
+    for movie in sorted_movies:
         print(movie.getMovie() + ", Rating out of 10: " + movie.getScore() + ", Similarity Score: " + str(movie.getSimilarity(idealMovie)))
     print()
 
