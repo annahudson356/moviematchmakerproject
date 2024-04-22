@@ -10,7 +10,8 @@ def main():
     graphRunningSum = 0
     heapRunningSum = 0
     print("Welcome to Movie Matchmaker! Please follow the prompts below to be matched to your ideal movie! Please make "
-          "sure to watch capitalization!\n\n")
+          "sure to watch capitalization!\n\n NOTE: We use the data to enter to find the most similar movie across all aspects"
+          ", not necessarily the movie that matches everything exactly!")
     while True:
         toExit = input("Press ENTER to continue, any other key to exit: ")
         if toExit != "":
@@ -124,9 +125,16 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength
 
 
 def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
-    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10000)
+    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 1000)
+    tempMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 0)
+    highestSim = idealMovie
     heap.getArr().append(idealMovie)
-    heap.heapifyDown(0)
+    for movie in heap.getArr():
+        if movie.getSimilarity(idealMovie) > highestSim.getSimilarity(idealMovie):
+            if movie.movie not in heap.getArr() and movie.getMovie() != idealMovie.movie:
+                highestSim = movie.movie
+
+    heap.heapifyDown(heap.getArr().index(highestSim))
     for i in range(0, int(howManySuggestions)):
         print(heap.extractMax())
 

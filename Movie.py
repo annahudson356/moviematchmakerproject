@@ -1,5 +1,4 @@
 class Movie:
-
     def __init__(self, m, g, a, l, s):
         self.movie = m
         self.genre = g
@@ -19,12 +18,16 @@ class Movie:
                 self.length = "unknown"
         self.score = s
 
+    def getMovie(self):
+        return self.movie
+
     def getSimilarity(self, movie2):
+        # This could get ugly but we should have certain genres rank higher than others
         similarity = 0
         if movie2.genre == self.genre:
-            similarity += 1
+            similarity += 20
         if movie2.length == self.length:
-            similarity += 1
+            similarity += 10
         if movie2.actors == self.actors:
-            similarity += 1
+            similarity += 500
         return similarity

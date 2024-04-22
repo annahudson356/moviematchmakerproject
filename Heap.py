@@ -9,8 +9,6 @@ class Heap:
         self.size = 0
         self.heap_arr = []
 
-
-
     def getArr(self):
         return self.heap_arr
 
