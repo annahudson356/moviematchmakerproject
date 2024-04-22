@@ -3,6 +3,9 @@ class Movie:
         self.movie = m
         self.genre = g
         self.actors = a
+        self.age = y
+        self.length = l
+        self.score = s
         if y == "old" or y == "new":
             self.age = y
         else:
@@ -14,8 +17,6 @@ class Movie:
                 self.age = "new"
             else:
                 self.age = "unknown"
-
-
         if l == "short" or l == "medium" or l == "long" or l == "":
             self.length = l
         else:
@@ -29,7 +30,6 @@ class Movie:
                 self.length = "long"
             else:
                 self.length = "unknown"
-        self.score = s
 
     def getMovie(self):
         return self.movie

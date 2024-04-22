@@ -117,7 +117,7 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userMovieAge, userP
 def populateHeap(rows, idealMovie):
     heap = Heap()
     for i in range(len(rows)):
-        movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][14], rows[i][5])
+        movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][3], rows[i][14], rows[i][5])
         heap.getArr().append(movie)
         heap.size = heap.size + 1
         heap.heapifyUp(i, idealMovie)
