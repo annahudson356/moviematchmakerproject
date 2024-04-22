@@ -95,12 +95,25 @@ def populateHeap(rows, idealMovie):
     for i in range(len(rows)):
         if rows[i][14] == "":
             movie = Movie(rows[i][0], rows[i][2], rows[i][9], -1, rows[i][5])
+            if movie.getSimilarity(idealMovie) > 30:
+                heap.getArr().append(movie)
+                heap.size = heap.size + 1
         else:
             movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][14], rows[i][5])
-        heap.getArr().append(movie)
-        heap.size = heap.size + 1
+            if movie.getSimilarity(idealMovie) > 30:
+                heap.getArr().append(movie)
+                heap.size = heap.size + 1
 
-    heap.heapifyDown(0, idealMovie)
+
+
+    temp = Movie(rows[0][0], rows[0][2], rows[0][9], -1, rows[0][5])
+    index = 0
+    for i in range(0, heap.size):
+        if temp.getSimilarity(idealMovie) < heap.getArr()[i].getSimilarity(idealMovie):
+            temp = heap.getArr()[i]
+            index = i
+
+    heap.heapifyDown(index, idealMovie)
     return heap
 
 
