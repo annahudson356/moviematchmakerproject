@@ -6,18 +6,20 @@ class Movie:
         self.age = y
         self.length = l
         self.score = s
-        if y == "old" or y == "new":
+
+        if y.lower() == "old" or y.lower() == "new" or y.lower() == "":
             self.age = y
         else:
             y = float(y)
-        if isinstance(y, int):
+        if isinstance(y, float):
             if 0 <= y < 2000:
                 self.age = "old"
             elif 2000 <= y:
                 self.age = "new"
             else:
                 self.age = "unknown"
-        if l == "short" or l == "medium" or l == "long" or l == "":
+
+        if l.lower() == "short" or l.lower() == "medium" or l.lower() == "long" or l == "":
             self.length = l
         else:
             l = float(l)
@@ -40,13 +42,13 @@ class Movie:
     def getSimilarity(self, movie2):
         # This could get ugly but we should have certain genres rank higher than others
         similarity = 0
-        if movie2.genre == self.genre and movie2.genre != "" and self.genre != "":
+        if movie2.genre.lower() == self.genre.lower() and movie2.genre != "" and self.genre != "":
             similarity += 4
-        if movie2.length == self.length:
+        if movie2.length.lower() == self.length.lower():
             similarity += 1
-        if movie2.actors == self.actors and movie2.actors != "" and self.actors != "":
+        if movie2.actors.lower() == self.actors.lower() and movie2.actors != "" and self.actors != "":
             similarity += 5
-        if movie2.age == self.age:
+        if movie2.age.lower() == self.age.lower():
             similarity += 3
         return similarity
 
