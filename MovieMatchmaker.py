@@ -36,51 +36,48 @@ def main():
             except UnicodeDecodeError:
                 pass
 
-        try:
-            # Creates the graph and the heap data structure
+        # Creates the graph and the heap data structure
 
-            # Times the Graph Creation
-            a = datetime.now()
-            graph = populateGraph(rows)
-            b = datetime.now()
-            time = b - a
-            graphRunningSum += time.total_seconds()
-
-
-            # Times the Heap Creation
-            a = datetime.now()
-            movieHeap = populateHeap(rows, Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10))
-            b = datetime.now()
-            time = b - a
-            heapRunningSum += time.total_seconds()
+        # Times the Graph Creation
+        a = datetime.now()
+        graph = populateGraph(rows)
+        b = datetime.now()
+        time = b - a
+        graphRunningSum += time.total_seconds()
 
 
-            # Does the Matchmaking process
-
-            # Times the graph matchmaking process
-            print("Matchmaking using a graph: \n")
-            a = datetime.now()
-            matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
-            b = datetime.now()
-            time = b - a
-            graphRunningSum += time.total_seconds()
+        # Times the Heap Creation
+        a = datetime.now()
+        movieHeap = populateHeap(rows, Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10))
+        b = datetime.now()
+        time = b - a
+        heapRunningSum += time.total_seconds()
 
 
-            # Times the heap matchmaking process
-            print("Matchmaking using a heap: \n")
-            a = datetime.now()
-            matchHeap(movieHeap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
-            b = datetime.now()
-            time = b - a
-            heapRunningSum += time.total_seconds()
+        # Does the Matchmaking process
+
+        # Times the graph matchmaking process
+        print("Matchmaking using a graph: \n")
+        a = datetime.now()
+        matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
+        b = datetime.now()
+        time = b - a
+        graphRunningSum += time.total_seconds()
 
 
-            print("Graph Total Time: " + str(graphRunningSum))
-            print("Heap Total Time: " + str(heapRunningSum))
-            print("Which was faster? " + "Heap" if heapRunningSum < graphRunningSum else "Graph")
-        except ValueError:
-            print("Invalid Input! Please Try Again!\n\n\n")
-            continue
+        # Times the heap matchmaking process
+        print("Matchmaking using a heap: \n")
+        a = datetime.now()
+        matchHeap(movieHeap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
+        b = datetime.now()
+        time = b - a
+        heapRunningSum += time.total_seconds()
+
+
+        print("Graph Total Time: " + str(graphRunningSum))
+        print("Heap Total Time: " + str(heapRunningSum))
+        print("Which was faster? " + "Heap" if heapRunningSum < graphRunningSum else "Graph")
+
 
 
 def populateGraph(rows):
