@@ -111,7 +111,7 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userMovieAge, userP
     # sorts the movies so that movies with the same similarity score will be ranked highest to lowest based of their rating
     sorted_movies = sorted(movie_list, key=lambda movie: (movie.getSimilarity(idealMovie), movie.getScore()), reverse=True)
     for movie in sorted_movies:
-        print(movie.getMovie() + " - Rating: " + movie.getScore() + "/10 - Similarity Score: " + str(movie.getSimilarity(idealMovie)) + "/10")
+        print(movie.getMovie() + " - Rating: " + movie.getScore() + "/20 - Similarity Score: " + str(movie.getSimilarity(idealMovie)) + "/10")
 
 
 
@@ -134,7 +134,7 @@ def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userMovieAge, userPre
     # sorts the movies so that movies with the same similarity score will be ranked highest to lowest based of their rating
     sorted_movies = sorted(movie_list, key=lambda movie: (movie.getSimilarity(idealMovie), movie.getScore()),reverse=True)
     for movie in sorted_movies:
-        print(movie.getMovie() + " - Rating: " + movie.getScore() + "/10 - Similarity Score: " + str(movie.getSimilarity(idealMovie)) + "/10")
+        print(movie.getMovie() + " - Rating: " + movie.getScore() + "/20 - Similarity Score: " + str(movie.getSimilarity(idealMovie)) + "/10")
     print()
 
 
