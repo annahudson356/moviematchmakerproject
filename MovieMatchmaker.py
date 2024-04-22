@@ -101,6 +101,7 @@ def populateHeap(rows):
         else:
             movie = Movie(rows[i][0], rows[i][2], rows[i][9], float(rows[i][14]), rows[i][5])
         heap.getArr().append(movie)
+        heap.size = heap.size + 1
 
     heap.heapifyDown(0)
     return heap

@@ -16,9 +16,9 @@ class Heap:
         l = index * 2 + 1
         r = index * 2 + 2
         biggest = index
-        if l < self.size and self.heap_arr[l].similarity > self.heap_arr[biggest].similarity:
+        if l < self.size and self.heap_arr[l].getSimilarity() > self.heap_arr[biggest].getSimilarity():
             biggest = l
-        if r < self.size and self.heap_arr[r].similarity > self.heap_arr[biggest].similarity:
+        if r < self.size and self.heap_arr[r].getSimilarity() > self.heap_arr[biggest].getSimilarity():
             biggest = r
         if biggest != index:
             temp = self.heap_arr[index]
@@ -30,6 +30,7 @@ class Heap:
     def extractMax(self):
         # Inspired by Programming Quiz 6
         temp = self.heap_arr[0]
-        self.heap_arr[0] = self.heap_arr[--self.size]
+        self.size = self.size - 1
+        self.heap_arr[0] = self.heap_arr[self.size-1]
         self.heapifyDown(0)
         return temp.getMovie()
