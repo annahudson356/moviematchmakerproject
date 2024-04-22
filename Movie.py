@@ -3,7 +3,7 @@ class Movie:
         self.movie = m
         self.genre = g
         self.actors = a
-        if l == "short" or l == "medium" or l == "long" or l == "":
+        if l.lower() == "short" or l.lower() == "medium" or l.lower() == "long" or l == "":
             self.length = l
         else:
             l = float(l)
@@ -27,11 +27,11 @@ class Movie:
     def getSimilarity(self, movie2):
         # This could get ugly but we should have certain genres rank higher than others
         similarity = 0
-        if movie2.genre == self.genre and movie2.genre != "" and self.genre != "":
+        if movie2.genre.lower() == self.genre.lower() and movie2.genre != "" and self.genre != "":
             similarity += 2
-        if movie2.length == self.length:
+        if movie2.length.lower() == self.length.lower():
             similarity += 1
-        if movie2.actors == self.actors and movie2.actors != "" and self.actors != "":
+        if movie2.actors.lower() == self.actors.lower() and movie2.actors != "" and self.actors != "":
             similarity += 5
         return similarity
 
