@@ -10,7 +10,7 @@ def main():
     graphRunningSum = 0
     heapRunningSum = 0
     print("Welcome to Movie Matchmaker! Please follow the prompts below to be matched to your ideal movie! Please make "
-          "sure to watch capitalization!\n\n NOTE: We use the data to enter to find the most similar movie across all aspects"
+          "sure to watch capitalization!\n\nNOTE: We use the data to enter to find the most similar movie across all aspects"
           ", not necessarily the movie that matches everything exactly!")
     while True:
         toExit = input("Press ENTER to continue, any other key to exit: ")
@@ -21,10 +21,10 @@ def main():
             break
 
         # userSimilarMovie = input("Enter the movie you want to find something similar to ")
-        userFavoriteActors = input("Enter one actor you want to watch today ")
+        userFavoriteActors = input("Enter one actor you want to watch today: ")
         userFavoriteGenre = input("Enter your favorite genre: ")
         userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+): ")
-        howManySuggestions = int(input("Input how many suggestions you would like us to generate "))
+        howManySuggestions = int(input("Input how many suggestions you would like us to generate: "))
 
         rows = []
         with open("moviedata/movies.csv", 'r') as file:
@@ -57,6 +57,7 @@ def main():
         # Does the Matchmaking process
 
         # Times the graph matchmaking process
+        print("")
         print("Matchmaking using a graph: \n")
         a = datetime.now()
         matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
@@ -66,6 +67,7 @@ def main():
 
 
         # Times the heap matchmaking process
+        print("")
         print("Matchmaking using a heap: \n")
         a = datetime.now()
         matchHeap(movieHeap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
