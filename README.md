@@ -4,7 +4,6 @@ Have you ever been sitting in your living room with freshly popped popcorn, only
 
 In order to implement this, we used both the Graph and Heap data structures. We devised algorithms that utilized these data structures to determine a "similarity score" which was used to determine which movie is the most similar to the preferences entered by the user. After these algorithms run their course, the program will return the number of movies that the user requests to be generated!
 
-DISCLAIMER: We are not mind readers, so movie suggestions are not going to be perfect every single time.
 
 
 ## Authors
