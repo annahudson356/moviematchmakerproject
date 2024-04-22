@@ -83,9 +83,7 @@ def main():
 
         print("Graph Total Time: " + str(graphRunningSum))
         print("Heap Total Time: " + str(heapRunningSum))
-        print("Which was faster? " + "Heap" if heapRunningSum < graphRunningSum else "Graph") 
-
-
+        print("Which was faster? " + "Heap" if heapRunningSum < graphRunningSum else "Graph")
 
 
 def populateGraph(rows):
