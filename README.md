@@ -12,7 +12,7 @@ In order to implement this, we used both the Graph and Heap data structures. We 
 - Nora Choukri [@norachoukri](https://www.github.com/norachoukri)
 - Anna Hudson [@annahudson356](https://www.github.com/annahudson356)
 
-## Run Instruction
+## Run Instructions
 
 ### In order to use Movie MatchMaker to make your movie night smoother, please use the following steps to make sure that the program runs smoothly!
 1. Download the Repository by clicking the Green Code<> button at the top right of the repository and pressing "Download Zip"
