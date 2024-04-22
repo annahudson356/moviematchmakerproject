@@ -21,15 +21,8 @@ def main():
             print("Chloe Bai\nNora Choukri\nAnna Hudson")
             break
 
-        # gathers input for preferred movie
-        userFavoriteActors = input("Enter one actor you want to watch today: ")
-        userFavoriteGenre = input("Enter your favorite genre: ")
-        userMovieAge = input("Input whether you want an old movie (before 2000s) or new movie (after 2000s): ")
-        userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+): ")
-        howManySuggestions = int(input("Input how many suggestions you would like us to generate: "))
-
         rows = []
-        with open("moviedata/movies.csv", 'r') as file: # pass the movie data into rows
+        with open("moviedata/movies.csv", 'r') as file:  # pass the movie data into rows
             reader = csv.reader(file)
             header = next(reader)
             try:
@@ -38,6 +31,33 @@ def main():
             except UnicodeDecodeError:
                 pass
 
+        # gathers input for preferred movie
+        userFavoriteActor = input("Enter one actor you want to watch today: ")
+        actorFound = False
+        while not actorFound:
+            for row in rows:
+                if row[9] == userFavoriteActor:
+                    actorFound = True
+            if not actorFound:
+                userFavoriteActor = input("Actor not found! Re-enter one actor you want to watch today: ")
+        userFavoriteGenre = input("Enter the genre you want to watch today: ")
+        genreFound = False
+        while not genreFound:
+            for row in rows:
+                if row[2] == userFavoriteGenre:
+                    genreFound = True
+            if not genreFound:
+                userFavoriteGenre = input("Genre not found! Re-enter the genre you want to watch today: ")
+        userMovieAge = input("Input whether you want an old movie (before 2000s) or new movie (after 2000s): ")
+        while userMovieAge != "old" and userMovieAge != "new":
+            userMovieAge = input("Invalid input! Please type either 'old' or 'new': ")
+        userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+): ")
+        while userPreferredLength != "short" and userPreferredLength != "medium" and userPreferredLength != "long":
+            userPreferredLength = input("Invalid input! Please type either 'short', 'medium', or 'long': ")
+        howManySuggestions = input("Input how many suggestions you would like us to generate: ")
+        while not howManySuggestions.isdigit():
+            howManySuggestions = input("Invalid input! Please input a number: ")
+        howManySuggestions = int(howManySuggestions)
 
         # times the graph creation
         a = datetime.now()
@@ -51,7 +71,7 @@ def main():
 
         # times the heap creation
         a = datetime.now()
-        movieHeap = populateHeap(rows, Movie("", userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, 10))
+        movieHeap = populateHeap(rows, Movie("", userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, 10))
         b = datetime.now()
         time = b - a
         heapRunningSum += time.total_seconds()
@@ -63,7 +83,7 @@ def main():
         print("")
         print("Matchmaking using a graph: \n")
         a = datetime.now()
-        matchGraph(graph, userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, howManySuggestions)
+        matchGraph(graph, userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, howManySuggestions)
         b = datetime.now()
         time = b - a
         graphRunningSum += time.total_seconds()
@@ -73,7 +93,7 @@ def main():
         print("")
         print("Matchmaking using a heap: \n")
         a = datetime.now()
-        matchHeap(movieHeap, userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, howManySuggestions)
+        matchHeap(movieHeap, userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, howManySuggestions)
         b = datetime.now()
         time = b - a
         heapRunningSum += time.total_seconds()
@@ -93,8 +113,8 @@ def populateGraph(rows): # populates the graph with each movie in the dataset
         graph.addVertex(movie) # adds the vertex and edges to all similar movies
     return graph
 
-def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, howManySuggestions):
-    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, 10) # creates ideal movie to compare to
+def matchGraph(graph, userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, howManySuggestions):
+    idealMovie = Movie("", userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, 10) # creates ideal movie to compare to
     graph.addVertex(idealMovie) # adds the ideal movie to the graph and edges to its similar movies
     movies = graph.getEdges(idealMovie)
     movie_list = []
@@ -126,8 +146,8 @@ def populateHeap(rows, idealMovie):
     return heap
 
 
-def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, howManySuggestions):
-    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, 1000)
+def matchHeap(heap, userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, howManySuggestions):
+    idealMovie = Movie("", userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, 1000)
     movie_list = []
     while (len(movie_list) < howManySuggestions): # extract this max and add to movie_list for number of suggestions user inputted
         movie_list.append(heap.extractMax(idealMovie))
