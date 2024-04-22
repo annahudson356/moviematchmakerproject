@@ -11,15 +11,11 @@ class Graph:
         for vertex in self.adj_list:  # goes through each existing vertex in the graph
             for i in range(vertex.getSimilarity(key)):  # adds possibly multiple edges based on the similarity
                 self.adj_list[key].append(vertex)
-                self.adj_list[vertex].append(key)  # I think an undirected graph makes the most sense so add both ways?
+                self.adj_list[vertex].append(key)  # undirected graph so add both ways
 
-    def addEdge(self, key, value):
-        if key not in self.adj_list:
-            self.adj_list[key] = []
-        self.adj_list[key].append(value)
-
-    def getEdges(self, key):
+    def getEdges(self, key): # returns all the edges of the vertex
         edges = []
         for vertex in self.adj_list[key]:
             edges.append(vertex)
         return edges
+
