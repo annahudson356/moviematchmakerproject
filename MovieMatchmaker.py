@@ -24,6 +24,7 @@ def main():
         # userSimilarMovie = input("Enter the movie you want to find something similar to ")
         userFavoriteActors = input("Enter one actor you want to watch today: ")
         userFavoriteGenre = input("Enter your favorite genre: ")
+        userMovieAge = input("Input whether you want an old movie (before 2000s) or new movie (after 2000s): ")
         userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+): ")
         howManySuggestions = int(input("Input how many suggestions you would like us to generate: "))
 
@@ -51,7 +52,7 @@ def main():
 
         # Times the Heap Creation
         a = datetime.now()
-        movieHeap = populateHeap(rows, Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10))
+        movieHeap = populateHeap(rows, Movie("", userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, 10))
         b = datetime.now()
         time = b - a
         heapRunningSum += time.total_seconds()
@@ -63,7 +64,7 @@ def main():
         print("")
         print("Matchmaking using a graph: \n")
         a = datetime.now()
-        matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
+        matchGraph(graph, userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, howManySuggestions)
         b = datetime.now()
         time = b - a
         graphRunningSum += time.total_seconds()
@@ -73,7 +74,7 @@ def main():
         print("")
         print("Matchmaking using a heap: \n")
         a = datetime.now()
-        matchHeap(movieHeap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions)
+        matchHeap(movieHeap, userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, howManySuggestions)
         b = datetime.now()
         time = b - a
         heapRunningSum += time.total_seconds()
@@ -90,12 +91,12 @@ def main():
 def populateGraph(rows):
     graph = Graph()
     for i in range(len(rows)):  # for all rows of movies
-        movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][14], rows[i][5])
+        movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][3], rows[i][14], rows[i][5])
         graph.addVertex(movie)
     return graph
 
-def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
-    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10)
+def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, howManySuggestions):
+    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, 10)
     graph.addVertex(idealMovie)
     movies = graph.getEdges(idealMovie)
     movie_list = []
@@ -125,8 +126,8 @@ def populateHeap(rows, idealMovie):
     return heap
 
 
-def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
-    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 1000)
+def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, howManySuggestions):
+    idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userMovieAge, userPreferredLength, 1000)
     movie_list = []
     while (len(movie_list) < howManySuggestions):
         movie_list.append(heap.extractMax(idealMovie))
