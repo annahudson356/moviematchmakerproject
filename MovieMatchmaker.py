@@ -16,7 +16,7 @@ def main():
     while True:
         toExit = input("Press ENTER to continue, any other key to exit: ")
         if toExit != "":
-            print("\n\n\nThanks for using Movie MatchMaker!")
+            print("\n\n\nThanks for using Movie MatchMaker! Happy Movie Night!")
             print("--------------------\nCredits: \n")
             print("Chloe Bai\nNora Choukri\nAnna Hudson")
             break
@@ -81,8 +81,8 @@ def main():
 
 
 
-        print("Graph Total Time: " + str(graphRunningSum))
-        print("Heap Total Time: " + str(heapRunningSum))
+        print("Graph Total Time: " + str(graphRunningSum) + "s")
+        print("Heap Total Time: " + str(heapRunningSum) + "s")
         print("Which was faster? " + "Heap" if heapRunningSum < graphRunningSum else "Graph")
 
 

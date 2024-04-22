@@ -23,17 +23,3 @@ class Graph:
         for vertex in self.adj_list[key]:
             edges.append(vertex)
         return edges
-
-    def bfs(self, source):
-        visited = [False]  # * graph.size()
-        visited[source] = True
-        q = deque
-
-        q.append(source)
-
-        while q:
-            current = q.popleft()
-            for neighbor in self.adj_list:
-                if not visited[neighbor]:
-                    visited[neighbor] = True
-                    q.enqueue(neighbor)
