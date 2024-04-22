@@ -5,8 +5,6 @@ from Heap import Heap
 from Movie import Movie
 
 
-
-
 def main():
     graphRunningSum = 0
     heapRunningSum = 0
@@ -66,16 +64,12 @@ def main():
         time = b - a
         graphRunningSum += time.total_seconds()
 
-
-
-
         # times the heap creation
         a = datetime.now()
         movieHeap = populateHeap(rows, Movie("", userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, 10))
         b = datetime.now()
         time = b - a
         heapRunningSum += time.total_seconds()
-
 
         # does the Matchmaking process
 
@@ -88,7 +82,6 @@ def main():
         time = b - a
         graphRunningSum += time.total_seconds()
 
-
         # times the heap matchmaking process
         print("")
         print("Matchmaking using a heap: \n")
@@ -97,7 +90,6 @@ def main():
         b = datetime.now()
         time = b - a
         heapRunningSum += time.total_seconds()
-
 
         # compares which data structure was faster
         print("Graph Total Time: " + str(graphRunningSum))
@@ -112,6 +104,7 @@ def populateGraph(rows): # populates the graph with each movie in the dataset
         movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][3], rows[i][14], rows[i][5])
         graph.addVertex(movie) # adds the vertex and edges to all similar movies
     return graph
+
 
 def matchGraph(graph, userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, howManySuggestions):
     idealMovie = Movie("", userFavoriteGenre, userFavoriteActor, userMovieAge, userPreferredLength, 10) # creates ideal movie to compare to
@@ -132,8 +125,6 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActor, userMovieAge, userPr
     sorted_movies = sorted(movie_list, key=lambda movie: (movie.getSimilarity(idealMovie), movie.getScore()), reverse=True)
     for movie in sorted_movies:
         print(movie.getMovie() + " - Rating: " + movie.getScore() + "/10 - Similarity Score: " + str(movie.getSimilarity(idealMovie)) + "/20")
-
-
 
 
 def populateHeap(rows, idealMovie):
