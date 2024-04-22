@@ -98,7 +98,7 @@ def populateHeap(rows, idealMovie):
     for i in range(len(rows)):
         if rows[i][14] == "":
             movie = Movie(rows[i][0], rows[i][2], rows[i][9], -1, rows[i][5])
-            if movie.getSimilarity(idealMovie) > 30:
+            if movie.getSimilarity(idealMovie) > 19:
                 heap.getArr().append(movie)
         else:
             movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][14], rows[i][5])
@@ -139,24 +139,23 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength
 
 def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
     try:
-        alreadyPrintedMovies = []
-        idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 1000)
-        # tempMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 0)
+        alreadyPrintedMovieNames = []
+        idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 100)
         highestSim = idealMovie
         heap.getArr().append(idealMovie)
         for movie in heap.getArr():
             if movie.getSimilarity(idealMovie) > highestSim.getSimilarity(idealMovie):
-                if movie.movie not in heap.getArr() and movie.getMovie() != idealMovie.movie:
+                if movie.getMovie() != idealMovie.movie:
                     highestSim = movie.movie
 
-        heap.heapifyDown(heap.getArr().index(highestSim), idealMovie)
         for i in range(0, int(howManySuggestions)):
-            if movie in alreadyPrintedMovies:
+            if movie.getMovie() in alreadyPrintedMovieNames:
                 print("No more similar recommendations!")
                 break
             else:
                 print(heap.extractMax(idealMovie))
-                alreadyPrintedMovies.append(heap.extractMax(idealMovie))
+                alreadyPrintedMovieNames.append(heap.extractMax(idealMovie))
+        heap.heapifyDown(heap.getArr().index(highestSim), idealMovie)
     except IndexError:
         print("No more similar recommendations! Check out some of these movies! Happy watching!")
 

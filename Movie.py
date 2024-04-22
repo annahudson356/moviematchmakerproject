@@ -57,7 +57,17 @@ class Movie:
                 elif self.genre == "Action":
                     similarity += 15
         if movie2.length == self.length:
-            similarity += 10
+            similarity += 15
+        else:
+            if movie2.length == "short" and self.length == "medium":
+                similarity += 5
+            elif movie2.length == "medium" and self.length == "short":
+                similarity += 5
+            elif movie2.length == "long" and self.length == "medium":
+                similarity += 5
+            elif movie2.length == "medium" and self.length == "long":
+                similarity += 5
+
         if movie2.actors == self.actors:
             similarity += 500
         return similarity

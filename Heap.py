@@ -1,6 +1,5 @@
 class Heap:
     def __init__(self):
-        self.max = -1
         self.size = 0
         self.heap_arr = []
 
