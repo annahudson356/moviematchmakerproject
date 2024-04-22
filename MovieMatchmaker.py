@@ -46,6 +46,8 @@ def main():
         graphRunningSum += time.total_seconds()
 
 
+
+
         # Times the Heap Creation
         a = datetime.now()
         movieHeap = populateHeap(rows, Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10))
@@ -76,9 +78,11 @@ def main():
         heapRunningSum += time.total_seconds()
 
 
+
         print("Graph Total Time: " + str(graphRunningSum))
         print("Heap Total Time: " + str(heapRunningSum))
-        print("Which was faster? " + "Heap" if heapRunningSum < graphRunningSum else "Graph")
+        print("Which was faster? " + "Heap" if heapRunningSum < graphRunningSum else "Graph") 
+
 
 
 
@@ -89,54 +93,44 @@ def populateGraph(rows):
         graph.addVertex(movie)
     return graph
 
-
-
-
-def populateHeap(rows, idealMovie):
-    heap = Heap()
-    for i in range(len(rows)):
-        if rows[i][14] == "":
-            movie = Movie(rows[i][0], rows[i][2], rows[i][9], -1, rows[i][5])
-        else:
-            movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][14], rows[i][5])
-        heap.getArr().append(movie)
-        heap.size = heap.size + 1
-
-    heap.heapifyDown(0, idealMovie)
-    return heap
-
-
 def matchGraph(graph, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
     idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 10)
     graph.addVertex(idealMovie)
     movies = graph.getEdges(idealMovie)
     movie_list = []
     while len(movie_list) < howManySuggestions:
-        top = ""
+        top = None
         highestSim = 0
         for movie in movies:
             if movie.getSimilarity(idealMovie) > highestSim:
-                if movie.movie not in movie_list and movie.movie != idealMovie.movie:
+                if movie not in movie_list and movie.movie != idealMovie.movie:
                     highestSim = movie.getSimilarity(idealMovie)
-                    top = movie.movie
+                    top = movie
         movie_list.append(top)
     for movie in movie_list:
-        print(movie)
+        print(movie.getMovie() + ", Rating out of 10: " + movie.getScore() + ", Similarity Score: " + str(movie.getSimilarity(idealMovie)))
+
+
+
+def populateHeap(rows, idealMovie):
+    heap = Heap()
+    for i in range(len(rows)):
+        movie = Movie(rows[i][0], rows[i][2], rows[i][9], rows[i][14], rows[i][5])
+        heap.getArr().append(movie)
+        heap.size = heap.size + 1
+        heap.heapifyUp(i, idealMovie)
+    return heap
 
 
 def matchHeap(heap, userFavoriteGenre, userFavoriteActors, userPreferredLength, howManySuggestions):
     idealMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 1000)
-    # tempMovie = Movie("", userFavoriteGenre, userFavoriteActors, userPreferredLength, 0)
-    highestSim = idealMovie
-    heap.getArr().append(idealMovie)
-    for movie in heap.getArr():
-        if movie.getSimilarity(idealMovie) > highestSim.getSimilarity(idealMovie):
-            if movie.movie not in heap.getArr() and movie.getMovie() != idealMovie.movie:
-                highestSim = movie.movie
-
-    heap.heapifyDown(heap.getArr().index(highestSim), idealMovie)
-    for i in range(0, int(howManySuggestions)):
-        print(heap.extractMax(idealMovie))
+    movie_list = []
+    while (len(movie_list) < howManySuggestions):
+        movie_list.append(heap.extractMax(idealMovie))
+    sorted_movies = sorted(movie_list, key=lambda x: x.getSimilarity(idealMovie), reverse=True)
+    for movie in sorted_movies:
+        print(movie.getMovie() + ", Rating out of 10: " + movie.getScore() + ", Similarity Score: " + str(movie.getSimilarity(idealMovie)))
+    print()
 
 
 if __name__ == '__main__':
