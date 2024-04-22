@@ -17,6 +17,6 @@ In order to implement this, we used both the Graph and Heap data structures. We 
 ### In order to use Movie MatchMaker to make your movie night smoother, please use the following steps to make sure that the program runs smoothly!
 1. Download the Repository by clicking the Green Code<> button at the top right of the repository and pressing "Download Zip"
 2. Once you have the file saved to the directory of your choice, extract the file and open Terminal
-3. Make sure you have Python installed on your machine. Check this by typing the command 'python'
-4. Navigate to the directory you chose to save the folder to, and type in the following command 'py .\MovieMatchmaker.py'
+3. Make sure you have Python installed on your machine. Check this by typing the command 'python.' If this works, you should see the terminal change to >>>, type exit() to return back to the normal Terminal
+4. Navigate to the folder containing the Python files, and type in the following command 'py .\MovieMatchmaker.py'
 5. Enjoy your moviewatching experience!
