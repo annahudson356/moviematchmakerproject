@@ -43,84 +43,82 @@ class Movie:
         # This could get ugly but we should have certain genres rank higher than others
         similarity = 0
         if movie2.genre.lower() == self.genre.lower() and movie2.genre != "" and self.genre != "":
-            similarity += 5
+            similarity += 3
         else:
             # Determines the relevance of a genre compared to other genres
-            if movie2.genre.lower() == "Horror":
-                if self.movie.genre == "Thriller":
+            if movie2.genre.lower() == "horror":
+                if self.genre.lower() == "thriller":
                     similarity += 3
-                if self.movie.genre == "Action":
+                if self.genre.lower() == "action":
+                    similarity += 1
+            elif movie2.genre.lower() == "drama":
+                if self.genre.lower() == "romance":
                     similarity += 2
-            elif movie2.genre.lower() == "Drama":
-                if self.movie.genre == "Romance":
-                    similarity += 3
-                if self.movie.genre == "Western":
+                if self.genre.lower() == "western":
+                    similarity += 1
+            elif movie2.genre.lower() == "adventure":
+                if self.genre.lower() == "action":
                     similarity += 2
-            elif movie2.genre.lower() == "Adventure":
-                if self.movie.genre == "Action":
-                    similarity += 3
-                if self.movie.genre == "Fantasy":
+                if self.genre.lower() == "fantasy":
+                    similarity += 1
+            elif movie2.genre.lower() == "comedy":
+                if self.genre.lower() == "adventure":
+                    similarity += 1
+            elif movie2.genre.lower() == "action":
+                if self.genre.lower() == "adventure":
                     similarity += 2
-            elif movie2.genre.lower() == "Comedy":
-                if self.movie.genre == "Family":
-                    similarity += 3
-                if self.movie.genre == "Adventure":
+                if self.genre.lower() == "fantasy":
+                    similarity += 1
+            elif movie2.genre.lower() == "biography":
+                if self.genre.lower() == "crime":
+                    similarity += 1
+            elif movie2.genre.lower() == "crime":
+                if self.genre.lower() == "thriller":
                     similarity += 2
-            elif movie2.genre.lower() == "Action":
-                if self.movie.genre == "Adventure":
-                    similarity += 3
-                if self.movie.genre == "Fantasy":
+                if self.genre.lower() == "biography":
+                    similarity += 1
+            elif movie2.genre.lower() == "fantasy":
+                if self.genre.lower() == "adventure":
                     similarity += 2
-            elif movie2.genre.lower() == "Biography":
-                if self.movie.genre == "Crime":
-                    similarity += 3
-            elif movie2.genre.lower() == "Crime":
-                if self.movie.genre == "Thriller":
-                    similarity += 3
-                if self.movie.genre == "Biography":
+                if self.genre.lower() == "action":
+                    similarity += 1
+            elif movie2.genre.lower() == "family":
+                if self.genre.lower() == "comedy":
                     similarity += 2
-            elif movie2.genre.lower() == "Fantasy":
-                if self.movie.genre == "Adventure":
-                    similarity += 3
-                if self.movie.genre == "Action":
+                if self.genre.lower() == "adventure":
+                    similarity += 1
+            elif movie2.genre.lower() == "sci-fi":
+                if self.genre.lower() == "thriller":
                     similarity += 2
-            elif movie2.genre.lower() == "Family":
-                if self.movie.genre == "Comedy":
-                    similarity += 3
-                if self.movie.genre == "Adventure":
+                if self.genre.lower() == "action":
+                    similarity += 1
+            elif movie2.genre.lower() == "animation":
+                if self.genre.lower() == "family":
                     similarity += 2
-            elif movie2.genre.lower() == "Sci-Fi":
-                if self.movie.genre == "Thriller":
+            elif movie2.genre.lower() == "thriller":
+                if self.genre.lower() == "horror":
                     similarity += 3
-                if self.movie.genre == "Action":
+                if self.genre.lower() == "sci-fi":
                     similarity += 2
-            elif movie2.genre.lower() == "Animation":
-                if self.movie.genre == "Family":
-                    similarity += 3
-            elif movie2.genre.lower() == "Thriller":
-                if self.movie.genre == "Sci-Fi":
-                    similarity += 3
-                if self.movie.genre == "Western":
+                if self.genre.lower() == "western":
+                    similarity += 1
+            elif movie2.genre.lower() == "western":
+                if self.genre.lower() == "romance":
                     similarity += 2
-            elif movie2.genre.lower() == "Western":
-                if self.movie.genre == "Romance":
-                    similarity += 3
-                if self.movie.genre == "Biography":
+                if self.genre.lower() == "biography":
+                    similarity += 1
+            elif movie2.genre.lower() == "romance":
+                if self.genre.lower() == "drama":
                     similarity += 2
-            elif movie2.genre.lower() == "Romance":
-                if self.movie.genre == "Drama":
-                    similarity += 3
-                if self.movie.genre == "Fantasy":
-                    similarity += 2
+                if self.genre.lower() == "comedy":
+                    similarity += 1
 
         if movie2.length.lower() == self.length.lower():
-            similarity += 2
+            similarity += 1
         if movie2.actors.lower() == self.actors.lower() and movie2.actors != "" and self.actors != "":
-            similarity += 6
-        if movie2.age.lower() == self.age.lower():
             similarity += 4
-        if float(self.score) > 7.0:
-            similarity += 3
+        if movie2.age.lower() == self.age.lower():
+            similarity += 2
 
         return similarity
 

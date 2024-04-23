@@ -29,29 +29,37 @@ def main():
             except UnicodeDecodeError:
                 pass
 
-        # gathers input for preferred movie
+        # gathers input for preferred movie and makes sure it's valid
         userFavoriteActor = input("Enter one actor you want to watch today: ")
         actorFound = False
-        while not actorFound:
-            for row in rows:
-                if row[9] == userFavoriteActor:
-                    actorFound = True
-            if not actorFound:
-                userFavoriteActor = input("Actor not found! Re-enter one actor you want to watch today: ")
+        if userFavoriteActor != "":
+            while not actorFound:
+                for row in rows:
+                    if row[9].lower() == userFavoriteActor.lower():
+                        actorFound = True
+                if not actorFound:
+                    userFavoriteActor = input("Actor not found! Re-enter one actor you want to watch today: ")
+
         userFavoriteGenre = input("Enter the genre you want to watch today: ")
         genreFound = False
-        while not genreFound:
-            for row in rows:
-                if row[2] == userFavoriteGenre:
-                    genreFound = True
-            if not genreFound:
-                userFavoriteGenre = input("Genre not found! Re-enter the genre you want to watch today: ")
+        if userFavoriteGenre != "":
+            while not genreFound:
+                for row in rows:
+                    if row[2].lower() == userFavoriteGenre.lower():
+                        genreFound = True
+                if not genreFound:
+                    userFavoriteGenre = input("Genre not found! Re-enter the genre you want to watch today: ")
+
         userMovieAge = input("Input whether you want an old movie (before 2000s) or new movie (after 2000s): ")
-        while userMovieAge != "old" and userMovieAge != "new":
-            userMovieAge = input("Invalid input! Please type either 'old' or 'new': ")
+        if userMovieAge != "":
+            while userMovieAge.lower() != "old" and userMovieAge.lower() != "new":
+                userMovieAge = input("Invalid input! Please type either 'old' or 'new': ")
+
         userPreferredLength = input("Input whether you want a short movie (<90), medium movie (90-120), long (120+): ")
-        while userPreferredLength != "short" and userPreferredLength != "medium" and userPreferredLength != "long":
-            userPreferredLength = input("Invalid input! Please type either 'short', 'medium', or 'long': ")
+        if userPreferredLength != "":
+            while userPreferredLength.lower() != "short" and userPreferredLength.lower() != "medium" and userPreferredLength.lower() != "long" and userPreferredLength != "":
+                userPreferredLength = input("Invalid input! Please type either 'short', 'medium', or 'long': ")
+
         howManySuggestions = input("Input how many suggestions you would like us to generate: ")
         while not howManySuggestions.isdigit():
             howManySuggestions = input("Invalid input! Please input a number: ")
@@ -124,7 +132,7 @@ def matchGraph(graph, userFavoriteGenre, userFavoriteActor, userMovieAge, userPr
     # sorts the movies so that movies with the same similarity score will be ranked highest to lowest based of their rating
     sorted_movies = sorted(movie_list, key=lambda movie: (movie.getSimilarity(idealMovie), movie.getScore()), reverse=True)
     for movie in sorted_movies:
-        print(movie.getMovie() + " - Rating: " + movie.getScore() + "/10 - Similarity Score: " + str(movie.getSimilarity(idealMovie)) + "/20")
+        print(movie.getMovie() + " - Rating: " + movie.getScore() + "/10 - Similarity Score: " + str(movie.getSimilarity(idealMovie)) + "/10")
 
 
 def populateHeap(rows, idealMovie):
@@ -145,7 +153,7 @@ def matchHeap(heap, userFavoriteGenre, userFavoriteActor, userMovieAge, userPref
     # sorts the movies so that movies with the same similarity score will be ranked highest to lowest based of their rating
     sorted_movies = sorted(movie_list, key=lambda movie: (movie.getSimilarity(idealMovie), movie.getScore()),reverse=True)
     for movie in sorted_movies:
-        print(movie.getMovie() + " - Rating: " + movie.getScore() + "/10 - Similarity Score: " + str(movie.getSimilarity(idealMovie)) + "/20")
+        print(movie.getMovie() + " - Rating: " + movie.getScore() + "/10 - Similarity Score: " + str(movie.getSimilarity(idealMovie)) + "/10")
     print()
 
 
